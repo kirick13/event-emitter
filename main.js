@@ -1,6 +1,8 @@
 
-module.exports = (() => {
-	const typeof_undefined = 'undefined';
+/* global self, document, EventTarget, CustomEvent */
+
+module.exports = (value_undefined => {
+	const typeof_undefined = String(value_undefined);
 	const [
 		is_emitter_nodejs,
 		is_emitter_eventtarget,
@@ -8,36 +10,36 @@ module.exports = (() => {
 		is_emitter_self,
 		is_event_name_need_prefix,
 	] = (() => {
-		if(typeof process !== typeof_undefined && null !== process.versions && null !== process.versions.node){
+		if (typeof process !== typeof_undefined && null !== process.versions && null !== process.versions.node) {
 			return [ true ];
 		}
-		if(typeof EventTarget !== typeof_undefined){
+		if (typeof EventTarget !== typeof_undefined) {
 			return [ false, true ];
 		}
-		if(typeof document !== typeof_undefined && typeof document.createElement === 'function'){
+		if (typeof document !== typeof_undefined && typeof document.createElement === 'function') {
 			return [ false, false, true ];
 		}
-		if(typeof self !== typeof_undefined){
+		if (typeof self !== typeof_undefined) {
 			return [ false, false, false, true, true ];
 		}
 		throw new Error('Cannot create event listener. Check your environment');
 	})();
 
 	const createEventBus = () => {
-		if(is_emitter_nodejs){
+		if (is_emitter_nodejs) {
 			const EventEmitter = require('events');
 			return new EventEmitter();
 		}
 
-		if(is_emitter_eventtarget){
+		if (is_emitter_eventtarget) {
 			return new EventTarget();
 		}
 
-		if(is_emitter_element){
+		if (is_emitter_element) {
 			return document.createElement('p');
 		}
 
-		if(is_emitter_self){
+		if (is_emitter_self) {
 			return self;
 		}
 	};
@@ -52,7 +54,7 @@ module.exports = (() => {
 
 		const bus = this._bus;
 
-		if(is_emitter_nodejs){
+		if (is_emitter_nodejs) {
 			bus.on(event_name, listener);
 			return () => {
 				bus.off(event_name, listener);
@@ -84,7 +86,7 @@ module.exports = (() => {
 
 		const bus = this._bus;
 
-		if(is_emitter_nodejs){
+		if (is_emitter_nodejs) {
 			bus.emit(
 				event_name,
 				...args,
