@@ -1,8 +1,10 @@
 {
 	"name": "@kirick/event-emitter",
-	"version": "0.1.0-beta.3",
+	"version": "0.1.0-beta.4",
 	"description": "Universal EventEmitter for Node.js, browser windows & workers.",
 	"main": "main.js",
+	"unpkg": "main.min.js",
+	"jsdelivr": "main.min.js",
 	"devDependencies": {
 		"xo": "latest"
 	},
