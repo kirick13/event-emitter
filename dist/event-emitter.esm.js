@@ -8,13 +8,12 @@ export default (storage = {}) => ({
 		return () => storage[event_name].delete(fn);
 	},
 	once (event_name, fn, off) {
-		off = this.on(
+		return off = this.on(
 			event_name,
 			(...args) => {
 				off();
 				fn(...args);
 			},
 		);
-		return off;
 	},
 });
