@@ -1,8 +1,13 @@
 {
 	"name": "@kirick/event-emitter",
-	"version": "2.0.2",
+	"version": "3.0.0",
 	"description": "Extremely small event emitter.",
-	"main": "main.js",
+	"type": "module",
+	"main": "./dist/event-emitter.cjs",
+	"module": "./main.js",
+	"devDependencies": {
+		"event-emitter": "file://../event-emitter"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/kirick13/event-emitter.git"

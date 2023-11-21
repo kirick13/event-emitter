@@ -1,5 +1,5 @@
 
-module.exports = (storage = {}) => ({
+export default (storage = {}) => ({
 	emit (event_name, ...args) {
 		(storage[event_name] ?? []).forEach(fn => fn(...args));
 	},
