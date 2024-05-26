@@ -1,1 +1,1 @@
-module.exports=(e={})=>({emit(t,...n){(e[t]??[]).forEach((e=>e(...n)))},on:(t,n)=>(e[t]=(e[t]??new Set).add(n),()=>e[t].delete(n)),once(e,t,n){return n=this.on(e,((...e)=>{n(),t(...e)}))}})
+module.exports=(e={})=>({emit(o,...t){(e[o]??[]).forEach((e=>e(...t)))},on:(o,t)=>(e[o]=(e[o]??new Set).add(t),()=>e[o].delete(t)),once(e,o,t){return t=this.on(e,((...e)=>{t(),o(...e)}))}})

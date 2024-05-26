@@ -1,12 +1,21 @@
 {
 	"name": "@kirick/event-emitter",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Extremely small event emitter.",
 	"type": "module",
-	"main": "./dist/event-emitter.cjs",
-	"module": "./main.js",
-	"devDependencies": {
-		"event-emitter": "file://../event-emitter"
+	"main": "./main.js",
+	"exports": {
+		".": {
+			"import": "./main.js",
+			"require": "./dist/event-emitter.cjs"
+		}
+	},
+	"scripts": {
+		"test": "bun test",
+		"build": "bun run build-cjs && bun run build-minify-esm && bun run build-minify-cjs",
+		"build-cjs": "cat main.js | sed 's/export default/module.exports =/' > ./dist/event-emitter.cjs",
+		"build-minify-esm": "bunx terser -c unsafe_arrows -m toplevel ./main.js | sed 's/;$//' > ./dist/event-emitter.min.js",
+		"build-minify-cjs": "bunx terser -c unsafe_arrows -m toplevel ./dist/event-emitter.cjs | sed 's/;$//' > ./dist/event-emitter.min.cjs"
 	},
 	"repository": {
 		"type": "git",
